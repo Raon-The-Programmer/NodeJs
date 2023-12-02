@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-const folderPath = path.join(__dirname, 'new'); 
+const folderPath = path.join(__dirname, 'newForlder');
 
 // Create folder if not exists
 if (!fs.existsSync(folderPath)) {
@@ -14,8 +14,10 @@ if (!fs.existsSync(folderPath)) {
 
 // API endpoint to create a text file with the current timestamp
 app.post('/createFile', (req, res) => {
-  const currentTimestamp = new Date().toISOString().replace(/:/g, '-'); // Remove ':' from timestamp for Windows compatibility
+  const currentTimestamp = new Date().toISOString().replace(/:/g, '-');
   const fileName = `${currentTimestamp}.txt`;
+
+  // Ensure filePath is defined correctly
   const filePath = path.join(folderPath, fileName);
 
   fs.writeFile(filePath, currentTimestamp, (err) => {
